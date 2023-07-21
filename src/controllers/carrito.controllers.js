@@ -53,9 +53,14 @@ carritoControllers.addJuego = async (req, res) => {
     const decode = jwt.verify(token, process.env.JWT);
     userId = decode.id;
 
-    const { usuario, juego, precio, cantidad } = req.body;
 
     try {
+        const { usuario, juego, precio, cantidad } = req.body;
+
+        const token = req.headers['x-access-token'];
+        const decode = jwt.verify(token, process.env.JWT);
+        userId = decode.id;
+
         const carritoRef = db.collection('carrito');
         const juegoRef = db.collection('juego').doc(juego);
         const juegoData = await juegoRef.get();

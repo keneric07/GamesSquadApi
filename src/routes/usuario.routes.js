@@ -11,7 +11,8 @@ const {
     createUsuario,
     updateUsuario,
     deleteUsuario,
-    inicioSesion
+    inicioSesion,
+    validarSesion
 } = require('../controllers/usuarios.controllers.js');
 
 
@@ -34,5 +35,9 @@ router.delete('/usuarios/:id', [verifyToken, isAdmin], deleteUsuario)
 
 // INICIAR SESIÓN
 router.post('/login', inicioSesion)
+
+
+// VALIDAR SESSION
+router.get('/validar-sesion', [verifyToken, isAdmin], validarSesion)
 
 module.exports = router;

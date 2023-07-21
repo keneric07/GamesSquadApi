@@ -170,6 +170,11 @@ usuarioController.inicioSesion = async (req, res) => {
 
 
 
+usuarioController.validarSesion = async (req, res) => {
+    res.status(200).json({
+        message: 'ok'
+    })
+}
 
 
 
