@@ -49,6 +49,9 @@ carritoControllers.getCarrito = async (req, res) => {
 }
 
 carritoControllers.addJuego = async (req, res) => {
+    const token = req.headers['x-access-token'];
+    const decode = jwt.verify(token, process.env.JWT);
+    userId = decode.id;
 
     const { usuario, juego, precio, cantidad } = req.body;
 
@@ -58,7 +61,7 @@ carritoControllers.addJuego = async (req, res) => {
         const juegoData = await juegoRef.get();
 
         const newCarrito = {
-            usuario: usuario,
+            usuario: userId,
             juego: juego,
             precio: juegoData.data().precio,
             cantidad: 1,
